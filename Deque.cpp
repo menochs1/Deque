@@ -114,7 +114,7 @@ int Deque::getSize()
   return currentSize;
 }
 
-int& Deque::operator[](int index)
+const int& Deque::operator[](int index)
 {
   if (index < 0 || index >= currentSize)
     {
