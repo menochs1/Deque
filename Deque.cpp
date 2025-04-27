@@ -13,7 +13,7 @@ Deque::Deque()
 
   this->blockMap = new int*[this->blockCount];
 
-  for (int i = 0; i < this->blockCount; ++i)
+  for (int i = 0; i < this->blockCount; i++)
     {
       this->blockMap[i] = new int[this->blockSize];
     }
@@ -119,6 +119,7 @@ const int& Deque::operator[](int index)
   if (index < 0 || index >= currentSize)
     {
       cout << "Index out of range error" << endl;
+      return -1;
     }
 
   int blockOffset = firstIndex + index;
