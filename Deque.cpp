@@ -12,13 +12,17 @@ Deque::Deque()
   this->firstBlock = 0;        
   this->firstIndex = this->blockSize / 2;  
   this->lastBlock = 0;         
-  this->lastIndex = (this->blockSize / 2) - 1;  
+  this->lastIndex = this->blockSize / 2;  
 
   this->blockMap = new int*[this->blockCount];
 
   for (int i = 0; i < this->blockCount; i++)
     {
-      this->blockMap[i] = new int[this->blockSize];
+      this->blockMap[i] = new int[this->blockSize] = {0};
+      for(int j = 0; j < this->blockSize; j++)
+        {
+            this->blockMap[i][j] = 0;
+        }
     }
 }
 
@@ -144,7 +148,7 @@ int Deque::getSize()
 
 const int& Deque::operator[](int index)
 {
-  if (index < 0 || index >= currentSize)
+  if (isEmpty() || index < 0 || index >= currentSize)
     {
       cout << "Index out of range error" << endl;
       return NULL;
