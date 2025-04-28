@@ -1,16 +1,17 @@
 CC = g++
+TARGET = run
 CFLAGS = -g -Wall -Wextra
 
-default: deque
+all: $(TARGET)
 
-employee: deque.o main.o
-    $(CC) $(CFLAGS) -o deque deque.o main.o
+$(TARGET): main.o Deque.o
+	$(CC) $(CFLAGS) -o $(TARGET) main.o Deque.o
 
-deque.o: deque.cpp deque.h
-    $(CC) $(CFLAGS) -c deque.cpp
+Deque.o: Deque.cpp Deque.h
+	$(CC) -c -Wall -Wextra Deque.cpp
 
-main.o: main.cpp deque.h
-    $(CC) $(CFLAGS) -c main.cpp
+main.o: main.cpp Deque.h
+	$(CC) -c -Wall -Wextra main.cpp
 
 clean:
-    $(RM) employee .o~
+	$(RM) $(TARGET) *.o *~

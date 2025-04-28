@@ -21,5 +21,6 @@ public:
   int getBack();
   bool isEmpty();
   int getSize();
+  void print();
   const int& operator[](int index);
 };

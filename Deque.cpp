@@ -1,5 +1,8 @@
+#include <iostream>
 #include <iomanip>
 #include "Deque.h"
+
+using namespace std;
 
 Deque::Deque()
 {
@@ -28,7 +31,32 @@ Deque::~Deque()
   delete[] blockMap;
 }
 
-void Deque::pushFront(int &value)
+void Deque::print()
+{
+  if (isEmpty()) {
+    cout << "Deque is empty!" << endl;
+    return;
+  }
+
+  int count = 0;
+  int block = firstBlock;
+  int index = firstIndex;
+
+  cout << "[ ";
+  while (count < currentSize) {
+    cout << blockMap[block][index] << " ";
+
+    count++;
+    index++;
+    if (index == blockSize) {
+      index = 0;
+      block++;
+    }
+  }
+  cout << "]" << endl;
+}
+
+void Deque::pushFront(int value)
 {
   if (firstIndex == 0)
     {
@@ -39,7 +67,7 @@ void Deque::pushFront(int &value)
   currentSize++;
 }
 
-void Deque::pushBack(int &value)
+void Deque::pushBack(int value)
 {
   if (lastIndex == blockSize - 1)
     {
@@ -119,7 +147,7 @@ const int& Deque::operator[](int index)
   if (index < 0 || index >= currentSize)
     {
       cout << "Index out of range error" << endl;
-      return -1;
+      return NULL;
     }
 
   int blockOffset = firstIndex + index;
